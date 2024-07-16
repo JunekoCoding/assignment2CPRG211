@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\pjosi\\Downloads\\OOP2 Assignment 2 (1)\\OOP2 Assignment 2\\OOP2 Assignment 2\\AbstractClasses\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\AbstractClasses.styles.css",
+      "PackagePath": "staticwebassets\\AbstractClasses.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\pjosi\\Downloads\\OOP2 Assignment 2 (1)\\OOP2 Assignment 2\\OOP2 Assignment 2\\AbstractClasses\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\pjosi\\Downloads\\OOP2 Assignment 2 (1)\\OOP2 Assignment 2\\OOP2 Assignment 2\\AbstractClasses\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\pjosi\\Downloads\\OOP2 Assignment 2 (1)\\OOP2 Assignment 2\\OOP2 Assignment 2\\AbstractClasses\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pjosi\\Downloads\\OOP2 Assignment 2 (1)\\OOP2 Assignment 2\\OOP2 Assignment 2\\AbstractClasses\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\pjosi\\Downloads\\OOP2 Assignment 2 (1)\\OOP2 Assignment 2\\OOP2 Assignment 2\\AbstractClasses\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.AbstractClasses.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.build.AbstractClasses.props",
+      "PackagePath": "build\\AbstractClasses.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.buildMultiTargeting.AbstractClasses.props",
+      "PackagePath": "buildMultiTargeting\\AbstractClasses.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.buildTransitive.AbstractClasses.props",
+      "PackagePath": "buildTransitive\\AbstractClasses.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

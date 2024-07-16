@@ -1,0 +1,133 @@
+﻿@page "/reservations"
+@using System.Text;
+
+<style>
+    {
+        box-sizing: border-box;
+    }
+</style>
+
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Check Reservations By Code, Name, or Airline</h3>
+            </div>
+        </div>
+        <br />
+        <div>
+            <label>Reservation Code: </label><input class="form-control" type="text" id="code" name="code">
+            <label>Airline: </label><input class="form-control" type="text" id="airline" name="airline">
+            <label>Traveller Name: </label><input class="form-control" type="text" id="name" name="name">
+            <br />
+
+            <div class="row">
+                <div class="center">
+                    <button class="btn btn-primary">Find Reservations</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div>
+            <div>
+                <h3>Your Reservations</h3>
+            </div>
+        </div>
+        <br />
+        <br />
+        <select class="form-control" onfocus="this.selectedIndex = -1;">
+            <option value=" " selected>Please select a reservation</option>
+            <option>Loading...</option>
+        </select>
+
+        <br />
+        <div>
+            <br />
+            <div>
+                <div>
+                    <button>Cancel Reservations</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*
+@code {
+
+public object Flight { get; set; }
+public string Name { get; set; }
+public string Citizenship { get; set; }
+
+public Reservations(object flight, string name, string citizenship)
+{
+Flight = flight;
+Name = name;
+Citizenship = citizenship;
+}
+
+private object MakeReservations(object flight, string name, string citizenship)
+{
+try
+{
+if (flight != null && name != null && citizenship != null)
+{
+Reservations rObject = new Reservations(flight, name, citizenship);
+
+TextWriter tw = new StreamWriter("flights.csv");
+tw.WriteLine(rObject);
+tw.Close();
+
+return rObject;
+
+}
+else if (flight == null || name == null || name.Length == 0)
+{
+throw new ArgumentException("Parameter cannot be null or empty");
+return null;
+}
+return null;
+}
+catch (Exception ex)
+{
+Console.WriteLine(ex.Message);
+return null;
+}
+}
+
+public (string flight, string name, string citizenship) searchReservation(string searchName, string searchCitizenship)
+{
+try
+{
+using (TextReader tr = new StreamReader("flights.csv"))
+{
+string line;
+while ((line = tr.ReadLine()) != null)
+{
+string[] parts = line.Split(',');
+
+if (parts.Length >= 3)
+{
+string flight = parts[0];
+string name = parts[1];
+string citizenship = parts[2];
+
+if ((searchName != null && name == searchName) ||
+(searchCitizenship != null && citizenship == searchCitizenship) ||
+(searchName != null && name == searchName && searchCitizenship != null && citizenship == searchCitizenship))
+{
+return (flight, name, citizenship);
+}
+}
+}
+return (null, null, null);
+}
+}
+catch (Exception ex)
+{
+Console.WriteLine(ex.Message);
+return (null, null, null);
+}
+}
+} *@

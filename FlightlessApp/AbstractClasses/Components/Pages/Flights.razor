@@ -1,0 +1,263 @@
+﻿@page "/flights"
+@using global::AbstractClasses.Data
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .row>div {
+        flex-basis: 0;
+        flex-shrink: 1;
+        flex-grow: 1;
+    }
+</style>
+
+<div>
+    <div style="margin-bottom: 20px;">
+        <h3>Find Flight</h3>
+
+        <br />
+
+        <div class="row">
+            <div>
+                <label for="explicit-label-name">Origin: </label>
+                <select class="form-control">
+                    <option value="ANY">ANY</option>
+                    <option>Loading...</option>
+                </select>
+            </div>
+            <div>
+                <label for="explicit-label-name">Destination: </label>
+                <select class="form-control">
+                    <option value="Any">ANY</option>
+
+                    <option>Loading...</option>
+
+                </select>
+            </div>
+            <div>
+                <label for="explicit-label-name">Day: </label>
+                <select class="form-control">
+                    <option value="ANY">ANY</option>
+                    <option value="SUNDAY">SUNDAY</option>
+                    <option value="MONDAY">MONDAY</option>
+                    <option value="TUESDAY">TUESDAY</option>
+                    <option value="WEDNESDAY">WEDNESDAY</option>
+                    <option value="THURSDAY">THURSDAY</option>
+                    <option value="FRIDAY">FRIDAY</option>
+                    <option value="SATURDAY">SATURDAY</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="explicit-label-name"> </label>
+                <button class="btn btn-primary form-control">Find Flights</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <h3 style="margin-bottom: 10px;">Flights Search Results</h3>
+
+        <select class="form-control">
+
+            <option>Loading...</option>
+
+        </select>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <h3>Flight Details</h3>
+
+        <br />
+        <div>
+            <label>Flight code:</label> <input class="form-control" type="text" placeholder="Flight">
+            <label>Airline:</label><input class="form-control" type="text" placeholder="Airline">
+            <label>Day:</label> <input class="form-control" type="text" placeholder="Day">
+            <label>Time:</label> <input class="form-control" type="text" placeholder="Time">
+            <label>Cost:</label> <input class="form-control" type="text" placeholder="Cost">
+        </div>
+        <br />
+        <div class="row">
+            <div class="center">
+                <h3>Add Traveller Details</h3>
+            </div>
+        </div>
+        <br />
+        <div>
+            <label>Name:</label> <input class="form-control" type="text" placeholder="Name">
+            <label>Citizenship:</label><input class="form-control" type="text" placeholder="Citizenship">
+        </div>
+        <br />
+
+        <div style="display: flex; justify-content: center;">
+            <button>Reserve</button>
+            <br /> <br />
+        </div>
+    </div>
+</div>
+
+@code {
+    internal class FlightManager
+    {
+        public static string DAY_ANY = "Any";
+
+        public static string DAY_SUNDAY = "Sunday";
+
+        public static string DAY_MONDAY = "Monday";
+
+        public static string DAY_TUESDAY = "Tuesday";
+
+        public static string DAY_WEDNESDAY = "Wednesday";
+
+        public static string DAY_THURSDAY = "Thursday";
+
+        public static string DAY_FRIDAY = "Friday";
+
+        public static string DAY_SATURDAY = "Saturday";
+
+
+        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+        @"..\..\..\..\..\Resources\Files\flights.csv");
+
+        public static string AIRPORTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+        @"..\..\..\..\..\Resources\Files\airports.csv");
+
+        public static List<Flight> flights = new List<Flight>();
+        public static List<string> airports = new List<string>();
+
+
+        public FlightManager()
+        {
+            populateAirports();
+            populateFlights();
+        }
+
+        // Gets all of the airports.
+
+        public List<string> getAirports()
+        {
+            return airports;
+        }
+
+        // Gets all of the flights.
+
+
+        public static List<Flight> getFlights()
+        {
+            return flights;
+        }
+
+        //Finds an airport with code.
+
+        public string findAirportByCode(string code)
+        {
+            foreach (string airport in airports)
+            {
+                if (airport.Equals(code))
+                    return airport;
+            }
+
+            return null;
+        }
+
+        // Finds a flight with code
+        public static Flight findFlightByCode(string code)
+        {
+            foreach (Flight flight in flights)
+            {
+                if (flight.Code.Equals(code))
+                    return flight;
+            }
+
+            return null;
+        }
+
+        // Finds flights going between airports on a specific day.
+
+        public static List<Flight> findFlights(string from, string to, string weekday)
+        {
+            List<Flight> found = new List<Flight>();
+
+            foreach (Flight flight in flights)
+            {
+                if ((flight.From.Equals(from) && flight.To.Equals(to) && flight.day.Equals(weekday) || flight.day.Contains(DAY_ANY)) ||
+                flight.day.Contains(DAY_ANY))
+                {
+                    found.Add(flight);
+                }
+            }
+            return found;
+        }
+
+        // Populates flights ArrayList with Flight objects from CSV file.
+
+        private void populateFlights()
+        {
+            flights.Clear();
+            try
+            {
+                int counter = 0;
+                Flight flight;
+                // Read the file and display it line by line.
+                foreach (string line in File.ReadLines(FLIGHTS_TEXT))
+                {
+                    Console.WriteLine(line);
+
+                    string[] parts = line.Split(",");
+
+                    string code = parts[0];
+                    string airline = parts[1];
+                    string from = parts[2];
+                    string to = parts[3];
+                    string day = parts[4];
+                    string fromAirport = findAirportByCode(from);
+                    string toAirport = findAirportByCode(to);
+
+                    try
+                    {
+                        flight = new Flight(code, airline, fromAirport, toAirport, day);
+
+                        flights.Add(flight);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
+                    counter++;
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        // Populates airports with Airport objects from CSV file.
+        private void populateAirports()
+        {
+            try
+            {
+                int counter = 0;
+                foreach (string line in File.ReadLines(AIRPORTS_TEXT))
+                {
+                    string[] parts = line.Split(",");
+
+                    string code = parts[0];
+                    string name = parts[1];
+                    airports.Add(code);
+
+                    counter++;
+                }
+            }
+            catch (Exception e)
+            {
+            }
+        }
+    }
+}
